@@ -3,7 +3,7 @@
 
 open Symbol
 open Graph
-(* open Cycles *)
+open Cycles
 (* open Path *)
 (* open Board *)
    
@@ -85,7 +85,7 @@ let () =
     end
 
 
-(*
+
 let () =
     if Filename.basename Sys.argv.(0) = "tests" then begin
       Printf.printf "Graph Generation:\t";
@@ -102,7 +102,7 @@ let () =
       assert (get_edge g (of_char 'Z') (of_char 'Y') = Positions.empty);
       Printf.printf "OK\n";
     end
- *)
+
 
 (*
 let () =
