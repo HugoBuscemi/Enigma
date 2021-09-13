@@ -47,10 +47,6 @@ let fold f x =
      |h::t -> f (r_fold t) h
   in r_fold (List.rev symbols);;
 
-
-let print_sym (symb:sym) =
-  Printf.fprintf "%c" (to_char symb);;
-
 module Set =
   struct
     
