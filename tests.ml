@@ -2,7 +2,7 @@
 (* Uncomment as you implement features *)
 
 open Symbol
-(* open Graph *)
+open Graph
 (* open Cycles *)
 (* open Path *)
 (* open Board *)
@@ -60,7 +60,7 @@ let () =
       Printf.printf "OK\n";
     end
 
-(*
+
 let () =
   if Filename.basename Sys.argv.(0) = "tests" then begin
       Printf.printf "Testing Graph Module:\t";
@@ -83,7 +83,7 @@ let () =
                       
       Printf.printf "OK\n";
     end
- *)
+
 
 (*
 let () =
