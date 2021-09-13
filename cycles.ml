@@ -7,6 +7,6 @@ let graph_of_known_cipher a b =
 
 
 let () =
-  if Filename.basename Sys.argv.(0) = "tests" then begin
+  if Filename.basename Sys.argv.(0) = "cycles" then begin
       let g = graph_of_known_cipher Sys.argv.(1) Sys.argv.(2) in ();
     end
