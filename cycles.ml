@@ -13,14 +13,24 @@ let cycles g =
   let rec rec_cycles elt_paths resu = match elt_paths with
       [] -> resu
      |p::t ->
-       let s = Path.source p in
+       let s = Path.source p and finalelt = List.hd (Path.rev_path p) in
        let func (elt_paths, resu) sym =
          if sym == s
-         then (elt_paths, (Path.snoc p s)::resu)
-         else if Path.mem p sym
+         then begin
+             let path = Path.rev_path p in
+             if (List.length path) == 2
+             then (elt_paths, resu)
+             else begin
+                 let sndelt = List.hd (List.tl (List.rev path)) in
+                 if Symbol.to_int sndelt < Symbol.to_int finalelt
+                 then (elt_paths, (Path.snoc p s)::resu)
+                 else (elt_paths, resu)
+               end
+           end
+         else if (Path.mem p sym) || (Symbol.to_int s) > (Symbol.to_int sym)
          then (elt_paths, resu)
          else ((Path.snoc p sym)::elt_paths, resu)
-       in let elt_paths,resu = Symbol.fold func (t,resu) in
+       in let elt_paths,resu = Graph.fold_over_connected g func (t,resu) finalelt in
           rec_cycles elt_paths resu
   in rec_cycles (init_paths()) [];;
 

@@ -146,8 +146,26 @@ let () =
 
       (* Write some tests for your functions to see if you get 
        * the same numbers of cycles *)
-
-      Printf.printf "TODO\n";
+      let g = graph_of_known_cipher "ABCDBAA" "ZZHKYYY" in
+      let cycles = Cycles.cycles g in
+      let rec path_from_chars li = match li with
+          [] -> failwith "Nop!"
+         |[a]-> Path.singleton (Symbol.of_char a)
+         |h::t -> Path.snoc (path_from_chars t) (Symbol.of_char h)
+      in
+      assert (List.mem (path_from_chars ['A';'Z';'B';'Y';'A']) cycles);
+      let rec print_rev_path p = match p with
+          [] -> ()
+         |h::t-> print_rev_path t;Printf.printf "%c " (Symbol.to_char h);
+      in
+      let print_path p = (print_rev_path (Path.rev_path p);Printf.printf "\n") in
+      List.iter print_path cycles;
+       (* - A(0)Z(0)A
+       * - B(4)Y(4)B
+       * - B(1)Z(1)B
+       * - C(2)H(2)C
+       * - D(3)K(3)D*);
+      Printf.printf "OK\n";
     end
 
 
