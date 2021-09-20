@@ -153,13 +153,8 @@ let () =
          |[a]-> Path.singleton (Symbol.of_char a)
          |h::t -> Path.snoc (path_from_chars t) (Symbol.of_char h)
       in
-      assert (List.mem (path_from_chars ['A';'Z';'B';'Y';'A']) cycles);
-      let rec print_rev_path p = match p with
-          [] -> ()
-         |h::t-> print_rev_path t;Printf.printf "%c " (Symbol.to_char h);
-      in
-      let print_path p = (print_rev_path (Path.rev_path p);Printf.printf "\n") in
-      List.iter print_path cycles;
+      assert (Cycles.mem (path_from_chars ['A';'Z';'B';'Y';'A']) cycles);
+      assert (List.length (Cycles.to_paths cycles) == 1);
        (* - A(0)Z(0)A
        * - B(4)Y(4)B
        * - B(1)Z(1)B
