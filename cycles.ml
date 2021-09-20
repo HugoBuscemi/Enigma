@@ -22,7 +22,7 @@ let cycles g =
          if sym == s
          then begin
              let path = Path.rev_path p in
-             if (List.length path) == 2
+             if (List.length path) = 2
              then (elt_paths, resu)
              else begin
                  let sndelt = List.hd (List.tl (List.rev path)) in
@@ -76,7 +76,7 @@ let () =
          Printf.printf "Nb cycles avant exp: %d\n" !nb_cycles;
          if !nb_cycles < 20
          then begin
-             let print_cycle _ c=
+             let print_cycle _ c =
                print_rev_path (Path.rev_path c);
                Printf.printf "\n";
              in iter_over_cycles g print_cycle;

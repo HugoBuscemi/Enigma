@@ -5,7 +5,7 @@ open Symbol
 open Graph
 open Cycles
 open Path
-(* open Board *)
+open Board
    
 let () =
   if Filename.basename Sys.argv.(0) = "tests" then begin
@@ -154,7 +154,7 @@ let () =
          |h::t -> Path.snoc (path_from_chars t) (Symbol.of_char h)
       in
       assert (Cycles.mem (path_from_chars ['A';'Z';'B';'Y';'A']) cycles);
-      assert (List.length (Cycles.to_paths cycles) == 1);
+      assert (List.length (Cycles.to_paths cycles) = 1);
        (* - A(0)Z(0)A
        * - B(4)Y(4)B
        * - B(1)Z(1)B
@@ -164,34 +164,35 @@ let () =
     end
 
 
-(*  
+
 let () =
   if Filename.basename Sys.argv.(0) = "tests" then begin
       Printf.printf "Board (1st version):\t";
       let b = top () in
       assert (possible b a a);
       assert (possible b (of_char 'Z') (of_char 'J'));
-      
+      Printf.printf "1\n";
       remove_assoc b a a;
       assert (possible b a a = false);
       assert (possible b (of_char 'Z') (of_char 'J'));
-
+      Printf.printf "2\n";
       remove_assoc b a (of_char 'B');
       assert (possible b a (of_char 'B') = false);
       assert (possible b (of_char 'B') a = false);
       assert (possible b (of_char 'Z') (of_char 'J'));
-
+      Printf.printf "3\n";
       (* removing all possible associations for a letter
          leads to an impossible board *)
       assert (
           try (Symbol.iter (fun c -> remove_assoc b a c); false) with
           | Impossible -> true);
-
+      Printf.printf "4\n";
       let b' = top () in
       (* removing all associations for A except Q *)
       Symbol.iter (fun c ->
           match (c = (of_char 'Q')) with
-          | false -> remove_assoc b' a c
+          | false -> (Printf.printf "%c" (to_char c);
+                     remove_assoc b' a c;)
           | true -> ());
 
       assert (possible b' a (of_char 'Q'));
@@ -201,7 +202,7 @@ let () =
 
       Printf.printf "OK\n";
     end
- *)
+
 
 (*  
 let () =
