@@ -25,6 +25,10 @@ exception Impossible
   * the fact that [x] and [y] cannot be associated in it.
   * If an inconsistency is detected, [Impossible] is raised. *)
 val remove_assoc : t -> Symbol.sym -> Symbol.sym -> unit
+
+(*val print_board : t -> unit*)
+                         
+
 (*
 (* --- Section 5.2 --- *)
 

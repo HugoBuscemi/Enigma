@@ -171,28 +171,23 @@ let () =
       let b = top () in
       assert (possible b a a);
       assert (possible b (of_char 'Z') (of_char 'J'));
-      Printf.printf "1\n";
       remove_assoc b a a;
       assert (possible b a a = false);
       assert (possible b (of_char 'Z') (of_char 'J'));
-      Printf.printf "2\n";
       remove_assoc b a (of_char 'B');
       assert (possible b a (of_char 'B') = false);
       assert (possible b (of_char 'B') a = false);
       assert (possible b (of_char 'Z') (of_char 'J'));
-      Printf.printf "3\n";
       (* removing all possible associations for a letter
          leads to an impossible board *)
       assert (
           try (Symbol.iter (fun c -> remove_assoc b a c); false) with
           | Impossible -> true);
-      Printf.printf "4\n";
       let b' = top () in
       (* removing all associations for A except Q *)
       Symbol.iter (fun c ->
           match (c = (of_char 'Q')) with
-          | false -> (Printf.printf "%c" (to_char c);
-                     remove_assoc b' a c;)
+          | false -> remove_assoc b' a c;
           | true -> ());
 
       assert (possible b' a (of_char 'Q'));
