@@ -23,11 +23,12 @@ let only_symbol mx =
     else x
   in Symbol.fold true_symb Symbol.a;;
 
-(*
+
 let print_map m =
   let print_symb x =
     if Symbol.Map.get m x
     then Printf.printf "%c" (Symbol.to_char x)
+    else Printf.printf " "
   in Printf.printf "[|";
      Symbol.iter print_symb;
      Printf.printf "|]";;
@@ -39,11 +40,12 @@ let print_board p =
     Printf.printf "\n";
   in Symbol.iter print_possibles;;
 
+(*
 let rec print_possibles l = match l with
     [] -> ()
    |s::t -> Printf.printf "%c" (Symbol.to_char s);
             print_possibles t;;
- *)
+*)
 
 let rec remove_unit_op p x y =
   (*Printf.printf "\n Delete %c-%c\n" (Symbol.to_char x) (Symbol.to_char y);
