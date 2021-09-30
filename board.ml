@@ -40,28 +40,14 @@ let print_board p =
     Printf.printf "\n";
   in Symbol.iter print_possibles;;
 
-(*
-let rec print_possibles l = match l with
-    [] -> ()
-   |s::t -> Printf.printf "%c" (Symbol.to_char s);
-            print_possibles t;;
-*)
 
 let rec remove_unit_op p x y =
-  (*Printf.printf "\n Delete %c-%c\n" (Symbol.to_char x) (Symbol.to_char y);
-  print_board p;*)
   let mx,boox = Symbol.Map.get p x and my,booy = Symbol.Map.get p y
   in Symbol.Map.set my x false;
      Symbol.Map.set mx y false;
      Symbol.Map.set p y (my,booy);
      Symbol.Map.set p x (mx,boox);
      let posx = possibles p x and posy = possibles p y in
-     (*Printf.printf "Possible of %c : [|" (Symbol.to_char x);
-     print_possibles posx;
-     Printf.printf "|]\n";
-     Printf.printf "Possible of %c : [|" (Symbol.to_char y);
-     print_possibles posy;
-     Printf.printf "|]\n";*)
      if List.length posx = 0 || List.length posy = 0
      then raise Impossible
      else begin
@@ -72,7 +58,6 @@ let rec remove_unit_op p x y =
        end
      
 and constrain p x =
-  (*Printf.printf "\n You found one constrain !\n";*)
   let mx = fst(Symbol.Map.get p x) in
   Symbol.Map.set p x (mx, true);
   let z = only_symbol mx in
